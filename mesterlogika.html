@@ -1,0 +1,227 @@
+<html>
+   <head>
+      <title>
+      </title>
+	  <style>
+	  body {
+	    background-color: #FC0B2B;
+        background-image: linear-gradient(to right, #FC0B2B , #FCFC0B);
+	  }
+	  
+	  .tabla {
+	     background-color: lightgrey;
+		 width: 410px;
+		 height: 920px;
+	     left: 40%;	     
+		 position: absolute;
+	  }
+	  
+      .mezopanel {
+	     display: grid;
+	     grid-template-columns: 80px 80px 80px 80px 80px;  
+         grid-row-gap: 1px;
+         grid-column-gap: 1px;
+		 position: relative;
+	  }
+	  
+	  .mezok {
+	     margin-left: 10px;
+         height: 70px;
+         width: 70px;
+		 border-width: 5px;  
+         border-style: outset;
+		 position: relative;
+	  }
+	  
+	  .ertekelopanel {
+	     position: relative;
+		 display: grid;
+		 grid-template-columns: 20px 20px;
+		 grid-row-gap: 0px;
+		 grid-column-gap: 9px;		 
+	  }
+	  
+	  .ertekelo {
+	     position: relative;
+		 height: 15px;
+         width: 15px;
+         border: outset;
+		 border-width:5px;
+		 margin-left: 20px;
+		 margin-top: 10px;
+	  }
+	  	  
+	  .feladvany {
+	     margin-left: 10px;
+	     margin-top: 20px;
+	     height: 70px;
+         width: 70px;
+		 border-width:5px;  
+         border-style:ridge;
+		 position: relative;
+		 
+	  }
+	  .gomb {
+	     margin-top: 25px;
+		 margin-left: 15px;
+	     height: 65px;
+         width: 65px;		 
+		 position: relative;
+		 	  
+	  }
+	  </style>
+	  
+	  <script type="text/javascript">
+	     var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
+		 var szinlista = szinek.slice();
+	     var rejtett_szinek = new Array();
+		 
+		 //szinek = ['red','green','yellow','blue','lightblue','purple'];	    
+		 var index = 0;
+		 
+	 
+		 function rejt(){			 
+			 for (i=0; i <= 3; i++) {
+				 randomindex = Math.floor(Math.random()*szinlista.length);
+				 rejtett_szinek.push(szinlista[randomindex]);
+				 szinlista.splice(randomindex ,1);
+			 }
+			 
+			 for (j=1; j <= 4; j++) {
+				 document.getElementById("fel"+j).style.background = rejtett_szinek[j-1];
+				 
+			 }			
+         }		 
+		 
+		 function szinvalasztas(id) {    
+			if (index == szinek.length) {
+				index = 0;
+			}
+			document.getElementById(id).style.background = szinek[index];
+			index++;							
+	     }
+		 		 
+		 function ertekel() {
+			 
+		 }
+		 function teszt(id) {
+			 alert(id);
+		 }
+	  
+	  </script>	
+   </head>
+   <body>
+      <div class="tabla">
+	     <div class="mezopanel">
+		    <div id="s1m1" class="mezok" ondblclick="szintorles(this.id)" onclick="szinvalasztas(this.id)"></div>
+			<div id="s1m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s1m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s1m4" class="mezok" onclick="szinvalasztas(this.id)"></div> 	
+			<div class="ertekelopanel">
+			   <div id="s1e1" class="ertekelo"></div>
+			   <div id="s1e2" class="ertekelo"></div>
+			   <div id="s1e3" class="ertekelo"></div>
+			   <div id="s1e4" class="ertekelo"></div>
+			</div>
+            <div id="s2m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s2m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s2m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s2m4" class="mezok" onclick="szinvalasztas(this.id)"></div> 	
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s3m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s3m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s3m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s3m4" class="mezok" onclick="szinvalasztas(this.id)"></div> 	
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s4m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s4m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s4m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s4m4" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s5m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s5m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s5m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s5m4" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+		 	   <div class="ertekelo"></div>
+			</div>
+	        <div id="s6m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s6m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s6m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s6m4" class="mezok" onclick="szinvalasztas(this.id)"></div> 	
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s7m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s7m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s7m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s7m4" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s8m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s8m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s8m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s8m4" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s9m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s9m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s9m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s9m4" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        <div id="s10m1" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s10m2" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s10m3" class="mezok" onclick="szinvalasztas(this.id)"></div>
+			<div id="s10m4" class="mezok" onclick="szinvalasztas(this.id)"></div> 	
+			<div class="ertekelopanel">
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			   <div class="ertekelo"></div>
+			</div>
+	        			
+			<div id="fel1" class="feladvany"></div>
+			<div id="fel2" class="feladvany"></div>
+			<div id="fel3" class="feladvany"></div>
+			<div id="fel4" class="feladvany"></div>
+			
+			<button class="gomb" onclick="ertekel()">Mehet!</button>
+	     </div>
+	  </div>
+	  <script type="text/javascript">rejt();</script>
+   </body>
+</html>
