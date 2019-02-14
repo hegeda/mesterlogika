@@ -5,7 +5,7 @@
 	  <style>
 	  body {
 	    background-color: #FC0B2B;
-        background-image: linear-gradient(to right, #FC0B2B , #FCFC0B);
+        background-image: linear-gradient(to right, #FC0B2B , #FCFC0B);		
 	  }
 	  
 	  .tabla {
@@ -61,17 +61,37 @@
 		 position: relative;
 		 
 	  }
-	  .gomb {
+	  .gomb .kivgomb{
 	     margin-top: 25px;
 		 margin-left: 15px;
 	     height: 65px;
          width: 65px;		 
 		 position: relative;
-		 	  
-	  }
+       }
+	   
+	   .kivgomb {
+	      grid-column: 1 / 4;
+	   }
+	   
+	   .szinpaletta {
+	      background-color: lightgrey;
+		  width: 150px;
+	   }
+	   
+	   form {
+	      display: grid;
+		  grid-template-columns: 20px 35px 70px;
+		  
+	   }
+	   
+	   .szinpaletta div {
+	       float: left;
+	   }
+	   .
 	  </style>
 	  
 	  <script type="text/javascript">
+	                    /*Piros    Sárga      Zöld   Világoskék Sötétkék   Lila*/
 	     var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
 		 var szinlista = szinek.slice();
 	     var rejtett_szinek = new Array();
@@ -79,7 +99,11 @@
 		 //szinek = ['red','green','yellow','blue','lightblue','purple'];	    
 		 var index = 0;
 		 
-	 
+	     function paletta(){
+		    for (j=1; j <= 6; j++) {
+		       document.getElementById("paletta"+j).style.background = szinek[j-1];
+			}
+		 }
 		 function rejt(){			 
 			 for (i=0; i <= 3; i++) {
 				 randomindex = Math.floor(Math.random()*szinlista.length);
@@ -104,6 +128,7 @@
 		 function ertekel() {
 			 
 		 }
+		 
 		 function teszt(id) {
 			 alert(id);
 		 }
@@ -222,6 +247,23 @@
 			<button class="gomb" onclick="ertekel()">Mehet!</button>
 	     </div>
 	  </div>
-	  <script type="text/javascript">rejt();</script>
+	  <div id="szinpaletta" class="szinpaletta">
+	     <form>		    
+		    <input type="radio" name="radio" value="#FF0000">Piros
+			<div id="paletta1" class="mezok"></div>
+			<input type="radio" name="radio" value="#FFFF00">Sárga
+			<div id="paletta2" class="mezok"></div>
+			<input type="radio" name="radio" value="#00FF00">Zöld
+			<div id="paletta3" class="mezok"></div>
+			<input type="radio" name="radio" value="#00FFFF">Világoskék.
+			<div id="paletta4" class="mezok"></div>
+			<input type="radio" name="radio" value="#0000FF">Sötétkék
+			<div id="paletta5" class="mezok"></div>
+			<input type="radio" name="radio" value="#FF00FF">Lila
+			<div id="paletta6" class="mezok"></div>			
+			<button id="kivalaszt" class="kivgomb" onclick="teszt(id)">Kiválaszt</button>
+		 </form>
+	  </div>
+	  <script type="text/javascript">rejt();paletta();</script>
    </body>
 </html>
