@@ -1,7 +1,6 @@
 <html>
    <head>
-      <title>
-      </title>
+      <title>Mesterlogika</title>
 	  <style>
 	  body {
 	    background-color: #FC0B2B;
@@ -11,13 +10,13 @@
 	  .tabla {
 	     background-color: lightgrey;
 		 width: 410px;
-		 height: 920px;
+		 height: 920px;		 
 	     left: 40%;	     
 		 position: absolute;
 	  }
 	  
       .mezopanel {
-	     display: grid;
+		 display: grid;
 	     grid-template-columns: 80px 80px 80px 80px 80px;  
          grid-row-gap: 1px;
          grid-column-gap: 1px;
@@ -25,6 +24,7 @@
 	  }
 	  
 	  .mezok, .pmezok {
+		 margin-top: 10px;	
 	     margin-left: 10px;		 
          height: 70px;
          width: 70px;
@@ -32,9 +32,11 @@
          border-style: outset;
 		 position: relative;		
 	  }
-	  
+	   	  
 	  .ertekelopanel {
-	     position: relative;
+	     position: relative;		
+		 width: 80px;
+		 height: 80px;
 		 display: grid;
 		 grid-template-columns: 20px 20px;
 		 grid-row-gap: 0px;
@@ -91,8 +93,9 @@
 	  </style>
 	  
 	  <script type="text/javascript">
-	                    /*Piros    Sárga      Zöld   Világoskék Sötétkék   Lila*/
-	     var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
+	                    /*Piros        Sárga      Zöld   Világoskék Sötétkék   Lila*/
+	     //var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
+		 var szinek = ["rgb(255, 0, 0)","rgb(255, 255, 0)","rgb(0, 255, 0)","rgb(0, 255, 255)","rgb(0, 0, 255)","rgb(255, 0, 255)"];		 
 		 var szinlista = szinek.slice();
 	     var rejtett_szinek = new Array();
 		 
@@ -100,7 +103,9 @@
 		 var index = 0;
 		 var nyit = 0;
 		 var aktivmezo = "";
-		 
+		 var lepes = 1;
+		 var fekete = 0;
+		 var feher = 0;		 
 		 		 
 	     function paletta(){
 		    for (j=1; j <= 6; j++) {
@@ -112,11 +117,7 @@
 				 randomindex = Math.floor(Math.random()*szinlista.length);
 				 rejtett_szinek.push(szinlista[randomindex]);
 				 szinlista.splice(randomindex ,1);
-			 }
-			 
-			 for (j=1; j <= 4; j++) {
-				 document.getElementById("fel"+j).style.background = rejtett_szinek[j-1];				 
-			 }			
+			 }		 			
          }		 
 		 
 		 function palettanyit(id) {   
@@ -136,24 +137,121 @@
 			document.getElementById("szinpaletta").style.display = "none";
 			nyit = 0;
 	     }
-		 
-		/* function szinvalasztas(id) {    
-			if (index == szinek.length) {
-				index = 0;
-			}
-			document.getElementById(id).style.background = szinek[index];
-			index++;							
-	     }*/
+					 
+		 function mehet() {
+			 console.log("--------------------------------------");
+			 if (ertekel(lepes)==true){
+				 for (j=1; j <= 4; j++) {
+				    document.getElementById("fel"+j).style.background = rejtett_szinek[j-1];				 
+			     }
+				 alert("Nyertél!");
+				 kikapcsol(lepes+1);
+				 document.getElementById("mehetgomb").disabled = true;				 
+			 } else {
+				 feketerajz(fekete);
+				 feherrajz(feher);
+				 fekete = 0;
+				 feher = 0;	
+				 utolsofekete = 0;
+				 lepes++;
+			     console.log("ertekel: "+lepes);
+			     if (lepes <= 10) {
+				    leptet(lepes);
+			     } else {
+					for (j=1; j <= 4; j++) {
+				        document.getElementById("fel"+j).style.background = rejtett_szinek[j-1];				 
+			        }
+			        alert("vesztettél!");
+				    kikapcsol(lepes+1);
+				    document.getElementById("mehetgomb").disabled = true;				
+			     }
+		     }
+		 }
 		 		 
-		 function ertekel() {
-			 
+		 function bekapcsol(lepes) {
+			 for (k=1; k <= 4; k++) {
+				document.getElementById("s"+lepes+k).disabled = false;   
+				console.log("enabled: s"+lepes+k);
+			 }	
 		 }
 		 
+		 function kikapcsol(lepes) {
+	        if (lepes > 11)  {
+				lepes = 11; 
+			}
+			for (k=1; k <= 4; k++) {
+			document.getElementById("s"+(lepes-1)+k).disabled = true;	
+			console.log("disabled: s"+(lepes-1)+k);
+		    }
+             				
+		 }
+		 
+		 function leptet(lepes) {
+			 kikapcsol(lepes);		 
+			 console.log(lepes);			 
+			 bekapcsol(lepes);				 
+		 }
+		 
+		 function feketerajz(fekete){
+			if (fekete > 0) {
+			   for (f=1; f <= fekete; f++) {
+		          document.getElementById("e"+lepes+f).style.background = "#000000";
+			   }			 
+			}
+		 }
+		 
+		 function feherrajz(feher){			 		
+			if (feher > 0) {
+			   if (fekete == 0) {
+			      for (f=1; f <= fekete+feher; f++) {
+		             document.getElementById("e"+lepes+f).style.background = "#FFFFFF";
+			      }	
+		       }else{
+			      for (f=fekete+1; f <= fekete+feher; f++) {
+		             document.getElementById("e"+lepes+f).style.background = "#FFFFFF";
+			      }
+			   }
+			}
+		 }			
+		 
+		 function ertekel(lepes) {
+	        for (i=1; i <= 4; i++) {
+			   for (j=1; j <= 4; j++) {			
+			      console.log(document.getElementById("s"+lepes+i).style.background);
+				  console.log(rejtett_szinek[j-1]);
+			      if (document.getElementById("s"+lepes+i).style.background == rejtett_szinek[j-1]) {
+				     if (i == j) {
+					    fekete++;
+						console.log("fekete:"+fekete);
+					 }else{
+					    feher++;
+						console.log("feher:"+feher);
+					 }
+		          }
+			   }		
+			}
+			if (document.getElementById("s"+lepes+1).style.background == rejtett_szinek[0]
+			 && document.getElementById("s"+lepes+2).style.background == rejtett_szinek[1]
+			 && document.getElementById("s"+lepes+3).style.background == rejtett_szinek[2]
+			 && document.getElementById("s"+lepes+4).style.background == rejtett_szinek[3])
+			 {
+		        return true;
+			 } else {
+				return false; 
+			 }
+		 }
+		 		 		 
+		 window.onload = function() {
+			 for (j=2; j <= 10; j++) {
+				 for (k=1; k <= 4; k++) {					 
+					document.getElementById("s"+j+k).disabled = true;
+				 }
+			 }
+		 }
+		
 		 function teszt(id) {
 			 alert(id);
 		 }
-		 
-		
 		
 	  
 	  </script>	
@@ -161,105 +259,105 @@
    <body>
       <div class="tabla">
 	     <div class="mezopanel">
-		    <div id="s11" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s12" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s13" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s14" class="mezok" onclick="palettanyit(this.id)"></div> 	
+		    <button id="s11" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s12" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s13" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s14" class="mezok" onclick="palettanyit(this.id)"></button> 	
 			<div class="ertekelopanel">
-			   <div id="s1e1" class="ertekelo"></div>
-			   <div id="s1e2" class="ertekelo"></div>
-			   <div id="s1e3" class="ertekelo"></div>
-			   <div id="s1e4" class="ertekelo"></div>
+			   <div id="e11" class="ertekelo"></div>
+			   <div id="e12" class="ertekelo"></div>
+			   <div id="e13" class="ertekelo"></div>
+			   <div id="e14" class="ertekelo"></div>
 			</div>
-            <div id="s21" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s22" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s23" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s24" class="mezok" onclick="palettanyit(this.id)"></div> 	
+            <button id="s21" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s22" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s23" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s24" class="mezok" onclick="palettanyit(this.id)"></button> 	
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e21" class="ertekelo"></div>
+			   <div id="e22" class="ertekelo"></div>
+			   <div id="e23" class="ertekelo"></div>
+			   <div id="e24" class="ertekelo"></div>
 			</div>
-	        <div id="s31" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s32" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s33" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s34" class="mezok" onclick="palettanyit(this.id)"></div> 	
+	        <button id="s31" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s32" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s33" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s34" class="mezok" onclick="palettanyit(this.id)"></button> 	
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e31" class="ertekelo"></div>
+			   <div id="e32" class="ertekelo"></div>
+			   <div id="e33" class="ertekelo"></div>
+			   <div id="e34" class="ertekelo"></div>
 			</div>
-	        <div id="s41" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s42" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s43" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s44" class="mezok" onclick="palettanyit(this.id)"></div>
+	        <button id="s41" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s42" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s43" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s44" class="mezok" onclick="palettanyit(this.id)"></button>
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e41" class="ertekelo"></div>
+			   <div id="e42" class="ertekelo"></div>
+			   <div id="e43" class="ertekelo"></div>
+			   <div id="e44" class="ertekelo"></div>
 			</div>
-	        <div id="s51" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s52" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s53" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s54" class="mezok" onclick="palettanyit(this.id)"></div>
+	        <button id="s51" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s52" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s53" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s54" class="mezok" onclick="palettanyit(this.id)"></button>
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-		 	   <div class="ertekelo"></div>
+			   <div id="e51" class="ertekelo"></div>
+			   <div id="e52" class="ertekelo"></div>
+			   <div id="e53" class="ertekelo"></div>
+		 	   <div id="e54" class="ertekelo"></div>
 			</div>
-	        <div id="s61" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s62" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s63" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s64" class="mezok" onclick="palettanyit(this.id)"></div> 	
+	        <button id="s61" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s62" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s63" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s64" class="mezok" onclick="palettanyit(this.id)"></button> 	
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e61" class="ertekelo"></div>
+			   <div id="e62" class="ertekelo"></div>
+			   <div id="e63"class="ertekelo"></div>
+			   <div id="e64" class="ertekelo"></div>
 			</div>
-	        <div id="s71" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s72" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s73" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s74" class="mezok" onclick="palettanyit(this.id)"></div>
+	        <button id="s71" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s72" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s73" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s74" class="mezok" onclick="palettanyit(this.id)"></button>
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e71" class="ertekelo"></div>
+			   <div id="e72" class="ertekelo"></div>
+			   <div id="e73"class="ertekelo"></div>
+			   <div id="e74" class="ertekelo"></div>
 			</div>
-	        <div id="s81" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s82" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s83" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s84" class="mezok" onclick="palettanyit(this.id)"></div>
+	        <button id="s81" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s82" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s83" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s84" class="mezok" onclick="palettanyit(this.id)"></button>
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e81" class="ertekelo"></div>
+			   <div id="e82" class="ertekelo"></div>
+			   <div id="e83" class="ertekelo"></div>
+			   <div id="e84" class="ertekelo"></div>
 			</div>
-	        <div id="s91" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s92" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s93" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s94" class="mezok" onclick="palettanyit(this.id)"></div>
+	        <button id="s91" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s92" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s93" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s94" class="mezok" onclick="palettanyit(this.id)"></button>
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e91" class="ertekelo"></div>
+			   <div id="e92" class="ertekelo"></div>
+			   <div id="e93" class="ertekelo"></div>
+			   <div id="e94" class="ertekelo"></div>
 			</div>
-	        <div id="s101" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s102" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s103" class="mezok" onclick="palettanyit(this.id)"></div>
-			<div id="s104" class="mezok" onclick="palettanyit(this.id)"></div> 	
+	        <button id="s101" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s102" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s103" class="mezok" onclick="palettanyit(this.id)"></button>
+			<button id="s104" class="mezok" onclick="palettanyit(this.id)"></button> 	
 			<div class="ertekelopanel">
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
-			   <div class="ertekelo"></div>
+			   <div id="e101" class="ertekelo"></div>
+			   <div id="e102" class="ertekelo"></div>
+			   <div id="e103" class="ertekelo"></div>
+			   <div id="e104" class="ertekelo"></div>
 			</div>
 	        			
 			<div id="fel1" class="feladvany"></div>
@@ -267,7 +365,7 @@
 			<div id="fel3" class="feladvany"></div>
 			<div id="fel4" class="feladvany"></div>
 			
-			<button class="gomb" onclick="ertekel()">Mehet!</button>
+			<button id="mehetgomb" class="gomb" onclick="mehet()">Mehet!</button>
 	     </div>
 	  </div>
 	  <div id="szinpaletta" class="szinpaletta">	  
