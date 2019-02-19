@@ -4,90 +4,89 @@
 	  <style>
 	  body {
 	    background-color: #FC0B2B;
-        background-image: linear-gradient(to right, #FC0B2B , #FCFC0B);		
+            background-image: linear-gradient(to right, #FC0B2B , #FCFC0B);		
 	  }
 	  
 	  .tabla {
 	     background-color: lightgrey;
-		 width: 410px;
-		 height: 920px;		 
+             width: 410px;
+             height: 920px;		 
 	     left: 40%;	     
-		 position: absolute;
+             position: absolute;
 	  }
 	  
       .mezopanel {
-		 display: grid;
+             display: grid;
 	     grid-template-columns: 80px 80px 80px 80px 80px;  
-         grid-row-gap: 1px;
-         grid-column-gap: 1px;
-		 position: relative;
+             grid-row-gap: 1px;
+             grid-column-gap: 1px;
+	     position: relative;
 	  }
 	  
-	  .mezok, .pmezok {
-		 margin-top: 10px;	
+       .mezok, .pmezok {
+	     margin-top: 10px;	
 	     margin-left: 10px;		 
-         height: 70px;
-         width: 70px;
-		 border-width: 5px;  
-         border-style: outset;
-		 position: relative;		
+             height: 70px;
+             width: 70px;
+	     border-width: 5px;  
+             border-style: outset;
+	     position: relative;		
 	  }
 	   	  
 	  .ertekelopanel {
 	     position: relative;		
-		 width: 80px;
-		 height: 80px;
-		 display: grid;
-		 grid-template-columns: 20px 20px;
-		 grid-row-gap: 0px;
-		 grid-column-gap: 9px;		 
+	     width: 80px;
+	     height: 80px;
+	     display: grid;
+	     grid-template-columns: 20px 20px;
+	     grid-row-gap: 0px;
+	     grid-column-gap: 9px;		 
 	  }
 	  
 	  .ertekelo {
 	     position: relative;
-		 height: 15px;
-         width: 15px;
-         border: outset;
-		 border-width:5px;
-		 margin-left: 20px;
-		 margin-top: 10px;
+	     height: 15px;
+             width: 15px;
+             border: outset;
+	     border-width:5px;
+	     margin-left: 20px;
+	     margin-top: 10px;
 	  }
 	  	  
 	  .feladvany {
 	     margin-left: 10px;
 	     margin-top: 20px;
 	     height: 70px;
-         width: 70px;
-		 border-width: 5px;  
-         border-style: ridge;
-		 position: relative;
-		 
+             width: 70px;
+             border-width: 5px;  
+             border-style: ridge;
+	     position: relative;
 	  }
 	  .gomb {
 	     margin-top: 25px;
-		 margin-left: 15px;
+	     margin-left: 15px;
 	     height: 65px;
-         width: 65px;		 
-		 position: relative;		 
-       }
+             width: 65px;		 
+	     position: relative;		 
+           }
 	   	   
-	   .szinpaletta {
-		   display: none;
-	       background-color: lightgrey;		   
-		   overflow: hidden;
-		   box-shadow: 0 0 20px black;
-		   position: absolute;	
-		   top: 50%;
-		   left: 50%;
-		   transform: translate(-50%, -50%);
-		   z-index: 1;		   
-		   text-align: center;		   
-		   margin: 5px;
+	  .szinpaletta {
+	      display: none;
+	      background-color: lightgrey;		   
+	      overflow: hidden;
+	      box-shadow: 0 0 20px black;
+	      position: absolute;	
+	      top: 50%;
+	      left: 50%;
+	      transform: translate(-50%, -50%);
+	      z-index: 1;		   
+	      text-align: center;		   
+	      margin: 5px;
 	   }
 	   	   
 	   .szinpaletta div {	        
-		   margin: 0;		
-		   float: left;
+	      margin: 0;		
+	      float: left;
 	   }  
 	   
 	  </style>
@@ -97,7 +96,7 @@
 	     //var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
 		 var szinek = ["rgb(255, 0, 0)","rgb(255, 255, 0)","rgb(0, 255, 0)","rgb(0, 255, 255)","rgb(0, 0, 255)","rgb(255, 0, 255)"];		 
 		 var szinlista = szinek.slice();
-	     var rejtett_szinek = new Array();
+	         var rejtett_szinek = new Array();
 		 
 		 //szinek = ['red','green','yellow','blue','lightblue','purple'];	    
 		 var index = 0;
@@ -107,7 +106,7 @@
 		 var fekete = 0;
 		 var feher = 0;		 
 		 		 
-	     function paletta(){
+	         function paletta(){
 		    for (j=1; j <= 6; j++) {
 		       document.getElementById("paletta"+j).style.background = szinek[j-1];
 			}
@@ -118,7 +117,7 @@
 				 rejtett_szinek.push(szinlista[randomindex]);
 				 szinlista.splice(randomindex ,1);
 			 }		 			
-         }		 
+                 }		 
 		 
 		 function palettanyit(id) {   
 			aktivmezo = id;
@@ -129,14 +128,14 @@
 			   document.getElementById("szinpaletta").style.display = "none";
 			   nyit = 0;
 			}			
-	     }
+	         }
 		 
 		 function szinvalasztas(id) {    
 			document.getElementById(aktivmezo).style.background = document.getElementById(id).style.background;			
 		    aktivmezo = "";
 			document.getElementById("szinpaletta").style.display = "none";
 			nyit = 0;
-	     }
+	         }
 					 
 		 function mehet() {
 			 console.log("--------------------------------------");
@@ -175,8 +174,8 @@
 			 }	
 		 }
 		 
-		 function kikapcsol(lepes) {
-	        if (lepes > 11)  {
+		function kikapcsol(lepes) {
+	           if (lepes > 11)  {
 				lepes = 11; 
 			}
 			for (k=1; k <= 4; k++) {
@@ -215,7 +214,7 @@
 		 }			
 		 
 		 function ertekel(lepes) {
-	        for (i=1; i <= 4; i++) {
+	               for (i=1; i <= 4; i++) {
 			   for (j=1; j <= 4; j++) {			
 			      console.log(document.getElementById("s"+lepes+i).style.background);
 				  console.log(rejtett_szinek[j-1]);
