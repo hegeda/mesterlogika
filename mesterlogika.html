@@ -95,12 +95,14 @@
 	  <script type="text/javascript">
 	                    /*Piros        Sárga      Zöld   Világoskék Sötétkék   Lila*/
 	     //var szinek = ["#FF0000","#FFFF00","#00FF00","#00FFFF","#0000FF","#FF00FF"];
-		 //Chrome
-		 var szinek = ["rgb(255, 0, 0)","rgb(255, 255, 0)","rgb(0, 255, 0)","rgb(0, 255, 255)","rgb(0, 0, 255)","rgb(255, 0, 255)"];		 
-		 //FF
-		 var szinek = ["rgb(255, 0, 0) none repeat scroll 0% 0%","rgb(255, 255, 0) none repeat scroll 0% 0%","rgb(0, 255, 0) none repeat scroll 0% 0%","rgb(0, 255, 255) none repeat scroll 0% 0%","rgb(0, 0, 255) none repeat scroll 0% 0%","rgb(255, 0, 255) none repeat scroll 0% 0%"];
-		  var szinlista = szinek.slice();
-	     var rejtett_szinek = new Array();
+		 var szinek;
+		 if (typeof InstallTrigger !== 'undefined') {
+		   szinek = ["rgb(255, 0, 0) none repeat scroll 0% 0%","rgb(255, 255, 0) none repeat scroll 0% 0%","rgb(0, 255, 0) none repeat scroll 0% 0%","rgb(0, 255, 255) none repeat scroll 0% 0%","rgb(0, 0, 255) none repeat scroll 0% 0%","rgb(255, 0, 255) none repeat scroll 0% 0%"];		 		
+		 } else {	
+		   szinek = ["rgb(255, 0, 0)","rgb(255, 255, 0)","rgb(0, 255, 0)","rgb(0, 255, 255)","rgb(0, 0, 255)","rgb(255, 0, 255)"];
+		 }
+		 var szinlista = szinek.slice();
+	         var rejtett_szinek = new Array();
 		 
 		 var index = 0;
 		 var nyit = 0;
