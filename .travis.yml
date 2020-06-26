@@ -6,9 +6,6 @@ services:
 before_install:
   - docker build -t hegeda/mesterlogika-1.0 .
 
-before_deploy:
-  - rvm 2.4.5 do gem install aws-sdk -v 2.11.536
-
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
@@ -17,5 +14,4 @@ deploy:
   bucket_name: "elasticbeanstalk-us-east-2-709699025531"
   bucket_path: "mesterklogika"
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  secret_access_key: $AWS_SECRET_KEY
