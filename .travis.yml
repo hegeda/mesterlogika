@@ -6,6 +6,9 @@ services:
 before_install:
   - docker build -t hegeda/mesterlogika-1.0 .
 
+before_deploy:
+  - rvm 2.4.5 do gem install aws-sdk -v 2.11.536
+
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
