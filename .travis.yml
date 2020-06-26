@@ -6,6 +6,9 @@ services:
 before_install:
   - docker build -t hegeda/mesterlogika-1.0 .
 
+script:
+  - docker run hegeda/mesterlogika-1.0 -- --coverage
+
 deploy:
   provider: elasticbeanstalk
   region: "us-east-2"
